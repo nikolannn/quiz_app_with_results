@@ -3,10 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuizController;
 
-Route::get('/', [QuizController::class, 'show']);
-Route::post('/', [QuizController::class, 'submit']);
+Route::get('/quiz', [QuizController::class, 'show']);
+Route::post('/quiz', [QuizController::class, 'submit']);
 
 
-// Route::get('/', function () {
-//     return view('result');
-// });
+
+Route::get('/', function () {
+    return view('welcome');
+});
