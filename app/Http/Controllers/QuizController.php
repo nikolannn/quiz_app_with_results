@@ -22,23 +22,29 @@ class QuizController extends Controller
     }
 
     public function submit(Request $request)
-    {
-        $score = 0;
-        $answers = $request->input('answers', []);
+{
+    $score = 0;
+    $answers = $request->input('answers', []);
 
-        foreach ($answers as $questionId => $optionId) {
-            $isCorrect = Option::where('id', $optionId)
-                ->where('is_correct', true)
-                ->exists();
+    // Fetch all answered questions with their options
+    $questionIds = array_keys($answers);
+    $questions = Question::whereIn('id', $questionIds)->with('options')->get();
 
-            if ($isCorrect) {
-                $score++;
-            }
+    foreach ($answers as $questionId => $optionId) {
+        $isCorrect = Option::where('id', $optionId)
+            ->where('is_correct', true)
+            ->exists();
+
+        if ($isCorrect) {
+            $score++;
         }
-
-        return view('quiz.result', [
-            'score' => $score,
-            'total' => count($answers)
-        ]);
     }
+
+    return view('quiz.result', [
+        'score' => $score,
+        'total' => count($answers),
+        'userAnswers' => $answers,     
+        'questions' => $questions      // 👈 added
+    ]);
+}
 }
