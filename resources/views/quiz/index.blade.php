@@ -16,11 +16,7 @@
             --accent-color: #00d4ff;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background: var(--dark-bg);
@@ -181,10 +177,6 @@
             box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
         }
 
-        .start-btn i {
-            transition: transform 0.3s ease;
-        }
-
         .start-btn:hover i {
             transform: translateX(5px);
         }
@@ -216,23 +208,9 @@
             animation: float 6s ease-in-out infinite;
         }
 
-        .shape:nth-child(1) {
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .shape:nth-child(2) {
-            top: 60%;
-            right: 10%;
-            animation-delay: 2s;
-        }
-
-        .shape:nth-child(3) {
-            bottom: 20%;
-            left: 20%;
-            animation-delay: 4s;
-        }
+        .shape:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .shape:nth-child(2) { top: 60%; right: 10%; animation-delay: 2s; }
+        .shape:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 4s; }
 
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
@@ -240,101 +218,82 @@
         }
 
         @media (max-width: 768px) {
-            .title {
-                font-size: 2rem;
-                margin-bottom: 2rem;
-            }
-
-            .category-card {
-                flex-direction: column;
-                gap: 1.5rem;
-                text-align: center;
-            }
-
-            .main-container {
-                padding: 1rem;
-            }
+            .title { font-size: 2rem; margin-bottom: 2rem; }
+            .category-card { flex-direction: column; gap: 1.5rem; text-align: center; }
+            .main-container { padding: 1rem; }
         }
     </style>
 </head>
 <body>
+
     <div class="floating-shapes">
-        <div class="shape">
-            <i class="fas fa-brain" style="font-size: 3rem; color: #667eea;"></i>
-        </div>
-        <div class="shape">
-            <i class="fas fa-lightbulb" style="font-size: 2.5rem; color: #f093fb;"></i>
-        </div>
-        <div class="shape">
-            <i class="fas fa-trophy" style="font-size: 3.5rem; color: #00d4ff;"></i>
-        </div>
+        <div class="shape"><i class="fas fa-brain" style="font-size: 3rem; color: #667eea;"></i></div>
+        <div class="shape"><i class="fas fa-lightbulb" style="font-size: 2.5rem; color: #f093fb;"></i></div>
+        <div class="shape"><i class="fas fa-trophy" style="font-size: 3.5rem; color: #00d4ff;"></i></div>
     </div>
 
     <div class="main-container">
         <div class="content-wrapper">
             <h1 class="title">Choose Your Challenge</h1>
-<!-- ... keep everything above as-is -->
 
-@if($categories->count())
-    <ul class="categories-grid">
-        @foreach($categories as $category)
-            <li class="category-card">
-                <div class="category-info">
-                    <div class="category-icon">
-                        <i class="fas fa-puzzle-piece"></i>
-                    </div>
-                    <h3 class="category-name">{{ $category->name }}</h3>
+            @if($categories->count())
+                <ul class="categories-grid">
+                    @foreach($categories as $category)
+                        <li class="category-card">
+                            <div class="category-info">
+                                <div class="category-icon">
+                                    <i class="fas fa-puzzle-piece"></i>
+                                </div>
+                                <h3 class="category-name">{{ $category->name }}</h3>
+                            </div>
+                            <a href="{{ route('quiz.start', $category->id) }}" class="start-btn">
+                                Start Quiz <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            @else
+                <div class="no-categories">
+                    <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i>
+                    No categories found. Check back soon for exciting quizzes!
                 </div>
-                <a href="{{ route('quiz.result', $category->id) }}" class="start-btn">
-                    Start Quiz
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </li>
-        @endforeach
-    </ul>
-@else
-    <div class="no-categories">
-        <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i>
-        No categories found. Check back soon for exciting quizzes!
-    </div>
-@endif
+            @endif
 
-<!-- ✅ CREATE CATEGORY BUTTON -->
-<div class="text-center mt-5">
-    <button class="start-btn" data-bs-toggle="modal" data-bs-target="#createCategoryModal">
-        <i class="fas fa-plus-circle"></i> Create Category
-    </button>
-</div>
-
-<!-- ✅ MODAL STRUCTURE -->
-<div class="modal fade" id="createCategoryModal" tabindex="-1" aria-labelledby="createCategoryModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content bg-dark text-white" style="border-radius: 20px; border: 1px solid var(--card-border); backdrop-filter: blur(20px); background-color: rgba(255,255,255,0.05);">
-            <div class="modal-header border-0">
-                <h5 class="modal-title" id="createCategoryModalLabel" style="color: var(--accent-color);">New Category</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="text-center mt-5">
+                <button class="start-btn" data-bs-toggle="modal" data-bs-target="#createCategoryModal">
+                    <i class="fas fa-plus-circle"></i> Create Category
+                </button>
             </div>
-            <form method="POST" action="{{ route('category.store') }}">
-                @csrf
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="categoryName" class="form-label" style="color: var(--text-secondary);">Category Name</label>
-                        <input type="text" class="form-control bg-transparent text-white border-0" id="categoryName" name="name" required style="border-radius: 12px; padding: 12px; background-color: rgba(255,255,255,0.05);">
-                    </div>
-                </div>
-                <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="start-btn">
-                        <i class="fas fa-check-circle"></i> Save Category
-                    </button>
-                </div>
-            </form>
         </div>
     </div>
-</div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="createCategoryModal" tabindex="-1" aria-labelledby="createCategoryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white" style="border-radius: 20px; border: 1px solid var(--card-border); backdrop-filter: blur(20px); background-color: rgba(255,255,255,0.05);">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="createCategoryModalLabel" style="color: var(--accent-color);">New Category</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="{{ route('category.store') }}">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="categoryName" class="form-label" style="color: var(--text-secondary);">Category Name</label>
+                            <input type="text" class="form-control bg-transparent text-white border-0" id="categoryName" name="name" required style="border-radius: 12px; padding: 12px; background-color: rgba(255,255,255,0.05);">
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="start-btn">
+                            <i class="fas fa-check-circle"></i> Save Category
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
 </html>
