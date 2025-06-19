@@ -51,10 +51,12 @@ class QuizSeeder extends Seeder
         ];
 
         foreach ($data as $categoryName => $questions) {
-            $category = Category::create(['name' => $categoryName]);
+            $category = Category::firstOrCreate(['name' => $categoryName]);
 
-            foreach ($questions as $qText => $optionsArray) {
-                $question = $category->questions()->create(['text' => $qText]);
+            foreach ($questions as $questionText => $optionsArray) {
+                $question = $category->questions()->create([
+                    'text' => $questionText
+                ]);
 
                 for ($i = 0; $i < count($optionsArray); $i += 2) {
                     $question->options()->create([

@@ -44,7 +44,7 @@ class QuizController extends Controller
         'score' => $score,
         'total' => count($answers),
         'userAnswers' => $answers,     
-        'questions' => $questions      // 👈 added
+        'questions' => $questions      
     ]);
 }
 }
