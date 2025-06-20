@@ -12,8 +12,7 @@ use App\Http\Controllers\AdminAuthController;
 // Homepage
 Route::view('/', 'homepage')->name('home');
 
-// Laravel needs this to redirect unauthenticated users
-// to the correct login page (admin login)
+// Redirect default login to admin login
 Route::get('/login', function () {
     return redirect('/admin/login');
 })->name('login');
@@ -29,16 +28,21 @@ Route::post('/quiz/submit', [QuizController::class, 'submit'])->name('quiz.submi
 // Admin Auth Routes
 // ===================
 Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
-Route::post('/admin/login', [AdminAuthController::class, 'login']);
+Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+//
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+});
 
 // ==============================
 // Protected Admin Routes (auth + admin)
 // ==============================
 Route::middleware(['auth', 'admin'])->group(function () {
+    // Admin Dashboard
+    Route::get('/admin', [AdminController::class, 'dashboard']);
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
-    // Dashboard (protected)
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
     // Category Management
     Route::get('/admin/category/create', [AdminController::class, 'createCategory'])->name('category.create');

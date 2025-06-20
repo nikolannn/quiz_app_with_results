@@ -12,13 +12,36 @@
     </div>
 
     <div class="d-flex justify-content-center gap-3 mb-5 flex-wrap">
-        <a href="{{ route('quiz.index') }}" class="btn btn-gradient btn-lg px-4 py-2 fw-semibold">
-            Take a Quiz
-        </a>
+    <a href="{{ route('quiz.index') }}" class="btn btn-gradient btn-lg px-4 py-2 fw-semibold">
+        Take a Quiz
+    </a>
+
+    @if(Auth::check() && Auth::user()->role === 'admin')
         <a href="{{ route('admin.dashboard') }}" class="btn btn-outline-gradient btn-lg px-4 py-2 fw-semibold">
+            Welcome, {{ Auth::user()->name }}
+        </a>
+    @else
+        <a href="{{ route('admin.login') }}" class="btn btn-outline-gradient btn-lg px-4 py-2 fw-semibold">
+            Admin Login
+        </a>
+    @endif
+</div>
+
+    {{-- <div class="d-flex justify-content-center gap-3 mb-5 flex-wrap">
+    <a href="{{ route('quiz.index') }}" class="btn btn-gradient btn-lg px-4 py-2 fw-semibold">
+        Take a Quiz
+    </a>
+
+    @if(Auth::check() && Auth::user()->role === 'admin')
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-outline-gradient btn-lg px-4 py-2 fw-semibold">
+            Welcome, {{ Auth::user()->name }}
+        </a>
+    @else
+        <a href="{{ route('admin.login') }}" class="btn btn-outline-gradient btn-lg px-4 py-2 fw-semibold">
             Admin Dashboard
         </a>
-    </div>
+    @endif
+</div> --}}
 
     <div class="card bg-card-bg border border-card-border shadow-sm">
         <div class="card-header" style="background: var(--primary-gradient); color: white;">

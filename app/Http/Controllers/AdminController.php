@@ -14,13 +14,14 @@ class AdminController extends Controller
         $categories = Category::all();
         $questions = Question::all();
 
-        return view('admin.dashboard', compact('categories', 'questions'));
+        return view('admin.login.dashboard', compact('categories', 'questions'));
     }
 
     public function createCategory()
     {
         return view('admin.create-category');
     }
+  
 
     public function storeCategory(Request $request)
     {
