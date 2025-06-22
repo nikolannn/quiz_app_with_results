@@ -1,3 +1,4 @@
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -20,6 +21,18 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 - [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
+
+## About the Quiz app with results
+
+- This App makes that your quizzes are made for students that can answer and know the results as soon as they finish answering.
+
+- The quiz app has categories that can organize themes or topics so that the students won't be confused.
+
+- This app also has a login for admins and that can add, edit, and delete questions or categories for a more easy creation on quizzes.
+
+- Enjoy the App!!!
+
+- Made by Nicole Ann Flores, Alejo Batohanon, Arjay Caro
 
 ## Learning Laravel
 
