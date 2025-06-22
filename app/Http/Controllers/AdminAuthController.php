@@ -7,30 +7,19 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminAuthController extends Controller
 {
-    // Show login form
     public function showLoginForm()
     {
-        return view('admin.login'); // Make sure you have this Blade view
+        return view('admin.login');
     }
 
-    // Handle login
-   public function login(Request $request)
-{
-    $credentials = $request->only('email', 'password');
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
 
-    if (Auth::attempt($credentials)) {
-        $user = Auth::user();
-
-        if ($user->role === 'admin') {
+        if (Auth::attempt($credentials)) {
             return redirect()->route('admin.dashboard');
-        } else {
-            return redirect()->route('quiz.index'); // or user dashboard
         }
+
+        return back()->withErrors(['email' => 'Invalid credentials.']);
     }
-
-    return back()->withErrors([
-        'email' => 'Invalid credentials.',
-    ]);
-}
-
 }

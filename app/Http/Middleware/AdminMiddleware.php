@@ -7,13 +7,12 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminMiddleware
 {
-   public function handle($request, Closure $next)
-{
-    if (Auth::check() && Auth::user()->role === 'admin') {
-        return $next($request);
+    public function handle($request, Closure $next)
+    {
+        if (Auth::check() && Auth::user()->role === 'admin') {
+            return $next($request);
+        }
+
+        return redirect()->route('login')->with('error', 'Unauthorized access.');
     }
-
-    abort(403, 'Unauthorized');
-}
-
 }

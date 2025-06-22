@@ -7,17 +7,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Question extends Model
 {
-    use HasFactory;
+use HasFactory;
 
     protected $fillable = ['category_id', 'question'];
 
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
+public function category()
+{
+return $this->belongsTo(Category::class);
+}
 
-    public function options()
-    {
-        return $this->hasMany(Option::class);
-    }
+public function options()
+{
+return $this->hasMany(Option::class);
+}
 }
