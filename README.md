@@ -8,6 +8,20 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+
+
+## About the Quiz app with results
+
+- This App makes that your quizzes are made for students that can answer and know the results as soon as they finish answering.
+
+- The quiz app has categories that can organize themes or topics so that the students won't be confused.
+
+- This app also has a login for admins and that can add, edit, and delete questions or categories for a more easy creation on quizzes.
+
+- Enjoy the App!!!
+
+- Made by Nicole Ann Flores, Alejo Batohanon, Arjay Caro
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
@@ -21,18 +35,6 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 - [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## About the Quiz app with results
-
-- This App makes that your quizzes are made for students that can answer and know the results as soon as they finish answering.
-
-- The quiz app has categories that can organize themes or topics so that the students won't be confused.
-
-- This app also has a login for admins and that can add, edit, and delete questions or categories for a more easy creation on quizzes.
-
-- Enjoy the App!!!
-
-- Made by Nicole Ann Flores, Alejo Batohanon, Arjay Caro
 
 ## Learning Laravel
 
